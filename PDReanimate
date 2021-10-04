@@ -1,34 +1,22 @@
 Reanimate = "PD"
 HumanDied = false
 
-CountSCIFIMOVIELOL = 1
-function SCIFIMOVIELOL(Part0,Part1,Position,Angle)
-	local AlignPos = Instance.new('AlignPosition', Part1); AlignPos.Name = "AliP_"..CountSCIFIMOVIELOL
-	AlignPos.ApplyAtCenterOfMass = true;
-	AlignPos.MaxForce = 67752;
-	AlignPos.MaxVelocity = math.huge/9e110;
-	AlignPos.ReactionForceEnabled = false;
-	AlignPos.Responsiveness = 200;
-	AlignPos.RigidityEnabled = false;
-	local AlignOri = Instance.new('AlignOrientation', Part1); AlignOri.Name = "AliO_"..CountSCIFIMOVIELOL
-	AlignOri.MaxAngularVelocity = math.huge/9e110;
-	AlignOri.MaxTorque = 67752;
-	AlignOri.PrimaryAxisOnly = false;
-	AlignOri.ReactionTorqueEnabled = false;
-	AlignOri.Responsiveness = 200;
-	AlignOri.RigidityEnabled = false;
-	local AttachmentA=Instance.new('Attachment',Part1); AttachmentA.Name = "AthP_"..CountSCIFIMOVIELOL
-	local AttachmentB=Instance.new('Attachment',Part0); AttachmentB.Name = "AthP_"..CountSCIFIMOVIELOL
-	local AttachmentC=Instance.new('Attachment',Part1); AttachmentC.Name = "AthO_"..CountSCIFIMOVIELOL
-	local AttachmentD=Instance.new('Attachment',Part0); AttachmentD.Name = "AthO_"..CountSCIFIMOVIELOL
-	AttachmentC.Orientation = Angle
-	AttachmentA.Position = Position
-	AlignPos.Attachment1 = AttachmentA;
-	AlignPos.Attachment0 = AttachmentB;
-	AlignOri.Attachment1 = AttachmentC;
-	AlignOri.Attachment0 = AttachmentD;
-	CountSCIFIMOVIELOL = CountSCIFIMOVIELOL + 1
-
+function SCIFIMOVIELOL(part, parent, position, rotation)
+Instance.new("Attachment",part)
+Instance.new("AlignPosition",part)
+Instance.new("AlignOrientation",part)
+Instance.new("Attachment",parent)
+part.AlignPosition.Attachment0 = part.Attachment
+part.AlignOrientation.Attachment0 = part.Attachment
+part.AlignPosition.Attachment1 = parent.Attachment
+part.AlignOrientation.Attachment1 = parent.Attachment
+part.Attachment.Position = position
+part.Attachment.Orientation = rotation
+part.AlignPosition.Responsiveness = 200
+part.AlignOrientation.Responsiveness = 200
+part.AlignPosition.MaxForce = 9999999
+part.AlignPosition.RigidityEnabled = false
+part.AlignOrientation.MaxTorque = 9999999
 end
 
 if Reanimate == "PD" then
